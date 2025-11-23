@@ -1,0 +1,30 @@
+TO DO LIST
+
+find window ✓
+Capture window area ✓
+detect blocks area ✓
+and area to display options for replying ✓
+json ✓
+compare ✓
+return area to click (coordinates)
+click in area
+resizing and or moving window compatible ✓
+wait time interval
+Detection reply time ✓
+or save time ✓
+click on reply or save---------
+click ancillary processes : load, open storyline, open convo, increase chat speed
+put everything inside functions so script can be used multiple times based on loop from how many messages there are inside the convo
+
+yellow :
+bright : #f8d92b rgba(248,217,43,255) 50 82 97
+message bubble : #ffc73d rgba(255,199,61,255) 42 76 100
+light : #f8f7ee rgba(248,247,238,255) 54 4 97
+contour light : #f8cc53 rgba(248,204,83,255)
+contour bright : #e09b0c rgba(224,155,12,255)
+
+
+optional :
+
+make coorsBlocks local (comparison function and maybe cropeachblock too) and passing it instead of global
+helper instead of lambdas for bs window

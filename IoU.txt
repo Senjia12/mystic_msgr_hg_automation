@@ -1,0 +1,20 @@
+# Overlapping areas script, not sure why I coded that, currently not using it neither planning to
+
+def iou(rect1, rect2):
+    x1, y1, w1, h1 = rect1
+    x2, y2, w2, h2 = rect2
+
+    # Coordinates of the rectangles
+    xa = max(x1, x2)
+    ya = max(y1, y2)
+    xb = min(x1 + w1, x2 + w2)
+    yb = min(y1 + h1, y2 + h2)
+
+    inter_area = max(0, xb - xa) * max(0, yb - ya)
+    area1 = w1 * h1
+    area2 = w2 * h2
+    union_area = area1 + area2 - inter_area
+
+    if union_area == 0: #Avoid division by zero if the rectangles don't overlap
+        return 0
+    return inter_area / union_area

@@ -1,0 +1,87 @@
+{
+  "1": {
+    "template": "i_miss_zen.png",
+    "blocks": ["block_1.png", "block_2.png"],
+    "delay": [11.36]
+  },
+  "2": {
+    "template": "jaehee_work.png",
+    "blocks": ["block_3.png", "block_4.png"],
+    "delay": [46.55]
+  },
+  "3": {
+    "template": "one_sided.png",
+    "blocks": ["block_5.png", "block_6.png"],
+    "delay": [35.45]
+  },
+  "4": {
+    "template": "falling.png",
+    "blocks": ["block_7.png"],
+    "delay": [26.01]
+  },
+  "5": {
+    "template": "masterr.png",
+    "blocks": ["block_8.png", "block_9.png"],
+    "delay": [35.45]
+  },
+  "6": {
+    "template": "send_hearts.png",
+    "blocks": ["block_10.png", "block_11.png"],
+    "delay": [26.91]
+  },
+  "7": {
+    "template": "what_to_say.png",
+    "blocks": ["block_12.png", "block_13.png"],
+    "delay": [22.89]
+  },
+  "8": {
+    "template": "be_with_zen_snif.png",
+    "blocks": ["block_14.png", "block_15.png"],
+    "delay": [57.57]
+  },
+  "9": {
+    "template": "this_way_with_me.png",
+    "blocks": ["block_16.png", "block_17.png"],
+    "delay": [23.48]
+  },
+  "10": {
+    "template": "hold_hands.png",
+    "blocks": ["block_18.png", "block_19.png"],
+    "delay": [19.83]
+  },
+  "11": {
+    "template": "warm_up_words.png",
+    "blocks": ["block_20.png", "block_21.png"],
+    "delay": [34.24]
+  },
+  "12": {
+    "template": "clos_your_eyes.png",
+    "blocks": ["block_22.png", "block_23.png"],
+    "delay": [18.68]
+  },
+  "13": {
+    "template": "date_with_zen.png",
+    "blocks": ["block_24.png", "block_25.png"],
+    "delay": [36.20]
+  },
+  "14": {
+    "template": "not_get_caught.png",
+    "blocks": ["block_26.png", "block_27.png"],
+    "delay": [12.23]
+  },
+  "15": {
+    "template": "run_seven.png",
+    "blocks": ["block_28.png", "block_29.png"],
+    "delay": [9.26]
+  },
+  "16": {
+    "template": "lonely.png",
+    "blocks": ["block_30.png", "block_31.png"],
+    "delay": [30.35]
+  },
+  "17": {
+    "template": "cheering_4u.png",
+    "blocks": ["block_32.png", "block_33.png"],
+    "delay": [16.94]
+  }
+}
