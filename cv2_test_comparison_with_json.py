@@ -12,7 +12,6 @@ templates_dir = "templates/"
 scores = {}
 
 # === Loading JSON ===
-json_path = "templates/templates.json"
 with open(json_path, "r") as f:
     all_messages = json.load(f)
 

@@ -16,7 +16,7 @@ import pyautogui
 import time
 from pynput import mouse
 
-msg_nb = 0  # "blocks group" to compare
+msg_nb = 1  # "blocks group" to compare
 json_path = "templates/templates.json"
 blocks_dir = "blocks/"
 templates_dir = "templates/"
@@ -80,7 +80,7 @@ def startAndGobalLoop():
 
 def get_bluestacks_window():
     try:
-        app = Application(backend="uia").connect(title_re="BlueStacks App Player")
+        app = Application(backend="win32").connect(title_re="BlueStacks App Player")
         return app.top_window()
     except Exception as e:
         print(f"Error while connecting to BlueStacks: {e}")
@@ -93,7 +93,7 @@ def is_inside_bluestacks(pos, window): # NOT USED, WHY ?
     
     x_abs, y_abs = pos
     try:
-        rect = window.wrapper_object().rectangle() # rectangle() object has 4 attributes : left right top bottom and 2 methods : width and height
+        rect = window.wrapper_object().client_area_rect() # rectangle() object has 4 attributes : left right top bottom and 2 methods : width and height
         x = x_abs - rect().left
         y = y_abs - rect().top
         return (rect().left <= x_abs <= rect().right) and (rect().top <= y_abs <= rect().bottom)

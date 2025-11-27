@@ -1,4 +1,4 @@
-# drawing feature with cv2 to visualize ROI position inside game window
+# drawing feature with cv2 to visualize ROI position inside game window (here ROI is button to start/resume/pause/reply when it's the player's turn to speak, at the bottom of the screen)
 # There are modules versions issues due to cv2 not supporting latest python, so I have to use python 312. the screenshot feature does not work anymore due to compatibilities issues with pyscreeze, used by pillow and pyautogui, so until I fix my cv2 version issue, the script cannot run
 # I recently clean installed windows and changed my python environment, I try to figure how I managed to make evrything work without cv2 versions incompatibilities
 
@@ -54,7 +54,7 @@ points = np.array([[x_pct_1 * rect_width, y_pct * rect_height], [x_pct_2 * rect_
 points = points.astype(np.int32)
 
 # Get the position and size of the window
-screenshot = pyautogui.screenshot(region=(window.left, window.top, rect.width() - side_bar, rect.height()))
+screenshot = pyautogui.screenshot(region=(rect.left, rect.top, rect.width() - side_bar, rect.height()))
 
 screenshot.save("my_image.png")
 img = cv2.imread("my_image.png")
