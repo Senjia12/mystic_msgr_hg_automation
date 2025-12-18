@@ -96,13 +96,13 @@ def on_click(x_abs, y_abs, button, pressed):
         last_click_time = now
         log_line(f"First click on ({x}, {y})")
     else:
-        if is_in_zone_dynamic(x, y, rect, area):
+        # if is_in_zone_dynamic(x, y, rect, area):
             now = time.time()
-            # delta = now - last_click_time
-            # log_line(f"Time interval : {delta:.4f} s")
+            delta = now - last_click_time
+            log_line(f"Time interval : {delta:.4f} s")
             last_click_time = now
-        else:
-            last_click_time = time.time()
+        # else:
+        #     last_click_time = time.time()
             log_line(f"Click on ({x}, {y} | Ratio ({x_ratio:.3f}, {y_ratio:.3f}))")
     
 

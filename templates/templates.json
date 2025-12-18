@@ -55,7 +55,7 @@
     "delay": [34.24]
   },
   "12": {
-    "template": "clos_your_eyes.png",
+    "template": "close_your_eyes.png",
     "blocks": ["block_22.png", "block_23.png"],
     "delay": [18.68]
   },

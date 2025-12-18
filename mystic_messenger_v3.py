@@ -1,11 +1,4 @@
-#Latest version of the script, doesn't run because I haven't finished to implement everything (minor features and adjustments missing) and for the following reason :
-# There are modules versions issues due to cv2 not supporting latest python, so I have to use python 312
-# I recently clean installed windows and changed my python environment, I try to figure how I managed to make evrything work without cv2 versions incompatibilities
-
-# ADDITIONAL DETAILS
-# cv2 relies on np 2.2.6 and pip is unable to install it even on python 313 (while this version of python is said to be supported by cv2 on their docs)
-# all fix found failed for me, so I had to downgrade python, cv2 is functionning but now pyautogui's related modules are causing issues
-#  the screenshot features does not work anymore due to compatibilities issues with pyscreeze, used by pillow and pyautogui, so until I fix my cv2 version issue, the scripts using it cannot run
+#Latest version of the script
 
 import cv2
 import json
@@ -55,12 +48,12 @@ def startAndGobalLoop():
 
         if find_yellow() is True: # check if yellow is detected and if yes => time to reply
             clickOnCoors() # missing arguments : define zone to be clicked
-            cv2.polylines(img, [points], isClosed=True, color=(0, 0, 255), thickness=2)
+            cv2.polylines(img, [points], isClosed=True, color=(255, 255, 0), thickness=2)
             cv2.imwrite("contours_area_reply.png", img)
 
         takeScreenShot()
 
-        blocks, template_filename = get_blocks_and_templates(msg_nb, all_messages)
+        blocks, template_filename, delay = get_blocks_and_templates(msg_nb, all_messages)
         template_path = os.path.join(templates_dir, template_filename)
     
         roi, y_start = setRoi(img, img_h)
@@ -77,6 +70,14 @@ def startAndGobalLoop():
         x_click, y_click = comparison(blocks, template_path, blocks_dir)
 
         clickOnCoors(x_click, y_click)
+        time.sleep(delay) # waiting the time the characters are chatting before the player can text
+
+    
+    if find_red is True:
+        clickOnCoors()
+        cv2.polylines(img, [points], isClosed=True, color=(255, 0, 0), thickness=2)
+        cv2.imwrite("contours_area_reply.png", img)
+        return # gotta add ancillary clicks (reload convo...)
 
 def get_bluestacks_window():
     try:
@@ -258,6 +259,58 @@ def find_yellow():
 
     if ratio > 0.1:
         print("Yellow frame detected → the player must respond")
+        return True
+
+    return False
+
+def find_red():
+    global h, w, x_min, x_max, y_min, y_max, img, points
+    img = cv2.imread(img)
+    if img is None:
+        raise FileNotFoundError(f"Image {img} not found.")
+
+    h, w, _ = img.shape
+
+    # Apply the cropping directly here
+    x_min = int(zone["x_min_pct"] * w)
+    x_max = int(zone["x_max_pct"] * w)
+    y_min = int(zone["y_min_pct"] * h)
+    y_max = h
+
+    points = np.array([
+    [x_min, y_min],
+    [x_max, y_min],
+    [x_max, y_max],
+    [x_min, y_max]
+    ], dtype=np.int32)
+    
+    roi = img[y_min:y_max, x_min:x_max]  # Cropped image (Region Of Interest)
+    cv2.imwrite("roi.png", roi)
+
+    # ↓ Downsampling to speed up processing
+    roi_small = cv2.resize(roi, (roi.shape[1] // 4, roi.shape[0] // 4))
+
+    h, w = roi.shape[:2]
+
+    x_min = int(zone["x_min_pct"] * w)
+    x_max = int(zone["x_max_pct"] * w)
+    y_min = int(zone["y_min_pct"] * h)
+    y_max = h
+
+    hsv = cv2.cvtColor(roi_small, cv2.COLOR_BGR2HSV)  # BGR → HSV
+
+    # Dynamic red range
+    # 1st range: dark red to medium (Hue around 0)
+    lower_red1 = np.array([0, 100, 100])
+    upper_red1 = np.array([10, 255, 255])
+
+    mask_1 = cv2.inRange(hsv, lower_red1, upper_red1)
+
+    ratio_1 = cv2.countNonZero(mask_1) / (mask_1.shape[0] * mask_1.shape[1])
+    cv2.imwrite("debug_mask_1.png", mask_1)
+
+    if ratio_1 > 0.01:
+        print("End of dialogue detected → the player must save and exit")
         return True
 
     return False
